@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-md-4">
         <p>
-            <input class="form-control">
+            <input class="form-control" @bind(result)>
         </p>
 
         <p>
@@ -16,7 +16,11 @@
         </p>
 
         <p>
-            <input class="form-control" readonly>
+            <input class="form-control" readonly @bind(result)>
         </p>
     </div>
 </div>
+
+@functions {
+    string result = null;
+}
