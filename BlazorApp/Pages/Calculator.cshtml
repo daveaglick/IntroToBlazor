@@ -6,21 +6,42 @@
 <div class="row">
     <div class="col-md-4">
         <p>
-            <input class="form-control" @bind(result)>
+            <input class="form-control" @bind(input)>
         </p>
 
         <p>
-            <button class="btn btn-primary">+</button>    
-            <button class="btn btn-primary">-</button>
+            <button class="btn btn-primary" @onclick(Add)>+</button>    
+            <button class="btn btn-primary" @onclick(Subtract)>-</button>
             <button class="btn btn-primary" disabled>=</button>
         </p>
 
         <p>
             <input class="form-control" readonly @bind(result)>
         </p>
+
+        <p>
+            Operation: @operation<br/>
+        </p>
     </div>
 </div>
 
 @functions {
+    enum Operation
+    {
+        None, Add, Subtract
+    }
+
+    string input = null;
+    Operation operation = Operation.None;
     string result = null;
+
+    void Add()
+    {
+        operation = Operation.Add;
+    }
+
+    void Subtract()
+    {
+        operation = Operation.Subtract;
+    }
 }
