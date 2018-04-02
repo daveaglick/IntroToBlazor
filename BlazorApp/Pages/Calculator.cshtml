@@ -9,6 +9,11 @@
             <input class="form-control" @bind(input)>
         </p>
 
+        @if(error != null)
+        {
+            <p class="text-danger">@error</p>
+        }
+
         <p>
             @if(a == null)
             {
@@ -47,6 +52,7 @@
     int? b = null;
     Operation operation = Operation.None;
     string result = null;
+    string error = null;
 
     void Add()
     {
@@ -70,14 +76,23 @@
         {
             return false;
         }
-        if(a == null)
+        try
         {
-            a = Int32.Parse(input);
+            if(a == null)
+            {
+                a = Int32.Parse(input);
+            }
+            else
+            {
+                b = Int32.Parse(input);
+            }            
         }
-        else
+        catch (System.Exception ex)
         {
-            b = Int32.Parse(input);
+            error = ex.Message;
+            return false;
         }
+        error = null;
         input = null;
         return true;
     }
