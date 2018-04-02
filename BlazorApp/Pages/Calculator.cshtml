@@ -84,6 +84,20 @@
 
     void Calculate()
     {
-        DataInput();
+        if(DataInput())
+        {
+            switch(operation)
+            {
+                case Operation.Add:
+                    result = (a.Value + b.Value).ToString();
+                    break;
+                case Operation.Subtract:
+                    result = (a.Value - b.Value).ToString();
+                    break;
+            }
+            a = null;
+            b = null;
+            operation = Operation.None;
+        }
     }
 }
