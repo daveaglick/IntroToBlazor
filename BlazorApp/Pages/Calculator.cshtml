@@ -20,7 +20,9 @@
         </p>
 
         <p>
+            A: @a<br/>
             Operation: @operation<br/>
+            B: @b
         </p>
     </div>
 </div>
@@ -32,16 +34,42 @@
     }
 
     string input = null;
+    int? a = null;
+    int? b = null;
     Operation operation = Operation.None;
     string result = null;
 
     void Add()
     {
-        operation = Operation.Add;
+        if(DataInput())
+        {
+            operation = Operation.Add;
+        }
     }
 
     void Subtract()
     {
-        operation = Operation.Subtract;
+        if(DataInput())
+        {
+            operation = Operation.Subtract;
+        }
+    }
+
+    bool DataInput()
+    {
+        if(string.IsNullOrEmpty(input))
+        {
+            return false;
+        }
+        if(a == null)
+        {
+            a = Int32.Parse(input);
+        }
+        else
+        {
+            b = Int32.Parse(input);
+        }
+        input = null;
+        return true;
     }
 }
