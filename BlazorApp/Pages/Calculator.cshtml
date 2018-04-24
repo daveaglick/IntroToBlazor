@@ -10,9 +10,18 @@
         </p>
 
         <p>
-            <button class="btn btn-primary" onclick="@Add">+</button>    
-            <button class="btn btn-primary" onclick="@Subtract">-</button>
-            <button class="btn btn-primary" disabled>=</button>
+            @if(a == null)
+            {
+                <button class="btn btn-primary" onclick="@Add">+</button>    
+                <button class="btn btn-primary" onclick="@Subtract">-</button>
+                <button class="btn btn-primary" disabled>=</button>
+            }
+            else
+            {
+                <button class="btn btn-primary" disabled>+</button>    
+                <button class="btn btn-primary" disabled>-</button>
+                <button class="btn btn-primary" onclick="@Calculate">=</button>
+            }
         </p>
 
         <p>
@@ -73,5 +82,10 @@
         }
         Input = string.Empty;  // Can't use null, won't pick up the state change
         return true;
+    }
+    
+    public void Calculate()
+    {
+        DataInput();
     }
 }
