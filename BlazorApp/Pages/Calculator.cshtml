@@ -11,7 +11,7 @@
 
         <p>
             <button class="btn btn-primary" onclick="@Add">+</button>    
-            <button class="btn btn-primary" onclick="@(e => Operation = Oper.Subtract)">-</button>
+            <button class="btn btn-primary" onclick="@Subtract">-</button>
             <button class="btn btn-primary" disabled>=</button>
         </p>
 
@@ -20,7 +20,9 @@
         </p>
 
         <p>
+            A: @a<br/>
             Operation: @Operation<br/>
+            B: @b<br/>
         </p>
     </div>
 </div>
@@ -34,9 +36,42 @@
     public string Input { get; set; }
     public Oper Operation { get; set; } = Oper.None;
     public string Result { get; set; }
+    
+    private int? a = null;
+    private int? b = null;
 
     public void Add()
     {
-        Operation = Oper.Add;
+        if(DataInput())
+        {
+            Operation = Oper.Add;
+        }
+    }
+
+    public void Subtract()
+    {
+        if(DataInput())
+        {
+            Operation = Oper.Subtract;
+        }
+    }
+        
+    // Set a or b based on which one has been previously set
+    public bool DataInput()
+    {
+        if(string.IsNullOrEmpty(Input))
+        {
+            return false;
+        }
+        if(a == null)
+        {
+            a = Int32.Parse(Input);
+        }
+        else
+        {
+            b = Int32.Parse(Input);
+        }
+        Input = string.Empty;  // Can't use null, won't pick up the state change
+        return true;
     }
 }
