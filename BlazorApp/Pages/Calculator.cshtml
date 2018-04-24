@@ -7,7 +7,12 @@
     <div class="col-md-4">
         <p>
             <input class="form-control" bind="@Input" />
-        </p>
+        </p>                
+                
+        @if(!string.IsNullOrEmpty(Error))
+        {
+            <p class="text-danger">@Error</p>
+        }
 
         <p>
             @if(a == null)
@@ -45,6 +50,7 @@
     public string Input { get; set; }
     public Oper Operation { get; set; } = Oper.None;
     public string Result { get; set; }
+    public string Error { get; set; }
     
     private int? a = null;
     private int? b = null;
@@ -72,16 +78,25 @@
         {
             return false;
         }
-        if(a == null)
+        try
         {
-            a = Int32.Parse(Input);
+            if(a == null)
+            {
+                a = Int32.Parse(Input);
+            }
+            else
+            {
+                b = Int32.Parse(Input);
+            }            
         }
-        else
+        catch (System.Exception ex)
         {
-            b = Int32.Parse(Input);
+            Error = ex.Message;
+            return false;
         }
         Input = string.Empty;  // Can't use null, won't pick up the state change
         Result = string.Empty;
+        Error = string.Empty;
         return true;
     }
     
