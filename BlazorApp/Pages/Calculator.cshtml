@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-md-4">
         <p>
-            <input class="form-control">
+            <input class="form-control" bind="@Result" />
         </p>
 
         <p>
@@ -16,7 +16,11 @@
         </p>
 
         <p>
-            <input class="form-control" readonly>
+            <input class="form-control" readonly bind="@Result" />
         </p>
     </div>
 </div>
+
+@functions {
+    public string Result { get; set; }
+}
