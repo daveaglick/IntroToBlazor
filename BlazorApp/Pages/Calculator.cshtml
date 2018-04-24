@@ -81,11 +81,26 @@
             b = Int32.Parse(Input);
         }
         Input = string.Empty;  // Can't use null, won't pick up the state change
+        Result = string.Empty;
         return true;
     }
     
     public void Calculate()
-    {
-        DataInput();
+    {        
+        if(DataInput())
+        {
+            switch(Operation)
+            {
+                case Oper.Add:
+                    Result = (a.Value + b.Value).ToString();
+                    break;
+                case Oper.Subtract:
+                    Result = (a.Value - b.Value).ToString();
+                    break;
+            }
+            a = null;
+            b = null;
+            Operation = Oper.None;
+        }
     }
 }
